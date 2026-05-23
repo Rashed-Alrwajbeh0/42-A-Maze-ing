@@ -2,6 +2,48 @@ import random
 from properties import cell
 
 
+def make_42(Cells, visited, rows, cols):
+    n = cols // 2 - 1
+    m = rows // 2 - 1
+    idx = cols * m + n
+    Cells[idx - 2].has_mid = True
+    visited.add(idx - 2)
+    Cells[idx - 2 - cols].has_mid = True
+    visited.add(idx - 2 - cols)
+    Cells[idx - 2 + cols].has_mid = True
+    visited.add(idx - 2 + cols)
+    Cells[idx - 1 + cols].has_mid = True
+    visited.add(idx - 1 + cols)
+    Cells[idx + cols].has_mid = True
+    visited.add(idx + cols)
+    Cells[idx + 2 * cols].has_mid = True
+    visited.add(idx + 2 * cols)
+    Cells[idx + 3 * cols].has_mid = True
+    visited.add(idx + 3 * cols)
+    idx += 1
+    Cells[idx + 1 + cols].has_mid = True
+    visited.add(idx + 1 + cols)
+    Cells[idx + 2 + cols].has_mid = True
+    visited.add(idx + 2 + cols)
+    Cells[idx + 3 + cols].has_mid = True
+    visited.add(idx + 3 + cols)
+    Cells[idx + 3].has_mid = True
+    visited.add(idx + 3)
+    Cells[idx + 3 - cols].has_mid = True
+    visited.add(idx + 3 - cols)
+    Cells[idx + 2 - cols].has_mid = True
+    visited.add(idx + 2 - cols)
+    Cells[idx + 1 - cols].has_mid = True
+    visited.add(idx + 1 - cols)
+    Cells[idx + 1 + 2 * cols].has_mid = True
+    visited.add(idx + 1 + 2 * cols)
+    Cells[idx + 1 + 3 * cols].has_mid = True
+    visited.add(idx + 1 + 3 * cols)
+    Cells[idx + 2 + 3 * cols].has_mid = True
+    visited.add(idx + 2 + 3 * cols)
+    Cells[idx + 3 + 3 * cols].has_mid = True
+    visited.add(idx + 3 + 3 * cols)
+
 def create_maze(rows, cols, start_point, end_point):
     Cells = []
     Ans = []
@@ -14,13 +56,10 @@ def create_maze(rows, cols, start_point, end_point):
     idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
     idx2 = cols* (end_point[0] - 1) + (end_point[1] - 1)
     visited.add(idx1)
-#    if cols > 7 and rows > 5:
-#        n = cols // 2
-#        even = True if cols % 2 == 0 else False
-#        m = rows // 2
-#        even2 = True if rows % 2 == 0 else False
-#        if even:
-#            idx = (n - 1)
+    if cols > 7 and rows > 5:
+        make_42(Cells, visited, rows, cols)
+    else:
+        print("ERROR: The 42 patern cannot printed in the middle of the maze, because the maze is to small")
 
     path = [idx1]
     while path:
