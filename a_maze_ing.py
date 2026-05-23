@@ -1,4 +1,4 @@
-from print_maze import print_grid
+from print_maze import print_grid, make_output
 from perfect_maze import create_maze as perfect
 import properties
 
@@ -10,9 +10,11 @@ try:
     start = properties.Entry
     end = properties.Exit
     seed = properties.Seed
+    out_file = properties.Output_file
     if perfect_:
         Cells, answer = perfect(rows, cols, start, end, seed)
         print_grid(Cells, rows, cols)
-        print(answer)
+        make_output(Cells, answer,  start, end, cols, rows, out_file)
+
 except (FileNotFoundError, ValueError) as e:
     print(e)

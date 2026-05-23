@@ -1,6 +1,8 @@
-width = 10
-hEiGHt = 10
-ENTRY =1, 1
-EXIT=  1,2             
+width = 50
 OUTPuT_FILE =  Rashed
-pErFect= True
+hEiGHt = 50
+EXIT=  50,50             
+ENTRY = 1 ,1
+
+  pErFect= True
+    #seEd = 0

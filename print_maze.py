@@ -34,3 +34,20 @@ def print_grid(cells, rows, cols):
                 else:
                     print(" #", end="")
             print("#")
+
+
+def make_output(cells, ans, start, end, cols, rows, out_file):
+    with open(out_file, "w") as file:
+        for i in range(rows):
+            for j in range(cols):
+                idx = i * cols + j
+                file.write(cells[idx].change_to_Hex())
+            file.write("\n")
+        file.write("\n")
+
+        file.write(f"{start[0]}, {start[1]}\n")
+        file.write(f"{end[0]}, {end[1]}\n")
+        for i in ans:
+            file.write(i)
+        file.write("\n")
+

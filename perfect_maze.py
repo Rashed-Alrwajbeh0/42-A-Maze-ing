@@ -45,7 +45,7 @@ def make_42(Cells, visited, rows, cols):
     visited.add(idx + 3 + 3 * cols)
 
 def create_maze(rows, cols, start_point, end_point, seed = None):
-    if seed:
+    if seed != None:
         random.seed(seed)
     Cells = []
     Ans = []

@@ -6,7 +6,19 @@ class cell:
         self.South = S
         self.Point = Point
         self.has_mid = False
-
+    
+    def change_to_Hex(self):
+        Hex_nums = "0123456789ABCDEF"
+        idx = 0
+        if self.North:
+            idx += 1
+        if self.East:
+            idx += 2
+        if self.South:
+            idx += 4
+        if self.West:
+            idx += 8
+        return Hex_nums[idx]
 Rows = None
 Cols = None
 Entry = None
@@ -22,10 +34,15 @@ def get_confing():
         raise FileNotFoundError("ERROR: a_maze_ing.py and config.txt are must just exist, but you enter more !!")
     elif len(argv) < 2:
         raise FileNotFoundError("Error: a_maze_ing.py and config.txt are must exist, but you didn't enter config.txt !!")
+    elif argv[1] != "config.txt":
+        raise FileNotFoundError("ERROR: config.txt must exist, it isn't found !!")
     file = open(argv[1], "r")
     global Rows, Cols, Entry, Exit, Output_file, Perfect, Seed
     content = file.read().strip().split("\n")
-    for i in content:
+    for ii in content:
+        i = ii.strip()
+        if i and i[0] == "#" or i == "":
+            continue
         if "=" not in i:
             raise ValueError("ERROR: Garbage values in config.txt, it must contain KEY = VALUE !!")
         aa, bb = i.split("=")
@@ -33,30 +50,65 @@ def get_confing():
         b = bb.strip()
         if a.upper() == "HEIGHT":
             try:
-                Cols = int(b)
+                n = int(b)
+                if n <= 0:
+                    raise ValueError("ERROR: HEIGHT must be a positive integer !!")
+                Cols = n
             except ValueError:
-                raise ValueError("ERROR: HEIGHT must be an integer !!")
+                raise ValueError("ERROR: HEIGHT must be a positive integer !!")
         elif a.upper() == "WIDTH":
             try:
-                Rows = int(b)
+                n = int(b)
+                if n <= 0:
+                    raise ValueError("ERROR: WIDTH must be a positive integer !!")
+                Rows = n
             except ValueError:
-                raise ValueError("ERROR: WIDTH must be an integer !!")
+                raise ValueError("ERROR: WIDTH must be a positive integer !!")
         elif a.upper() == "ENTRY":
+            if "," not in b:
+                raise ValueError("ERROR: The point must seperated by (,)")
             c, d = b.split(",")
             try:
-                Entry = (int(c), int(d))
+                x, y = (int(c), int(d))
             except ValueError:
-                raise ValueError("ERROR: Entry point must be a tuple of intgets , (int, int) !!")
+                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int, int) !!")
+            if Cols == None or Rows == None:
+                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT before the Entry point !!")
+            if x <= 0 or y <= 0:
+                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int > 0, int > 0) !!")
+            if x > Rows or y > Cols:
+                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int < rows, int < cols) !!")
+            if Exit != None and Exit[0] == x and Exit[1] == y:
+                raise ValueError("Error: Entry point and Exsit point cann't be the same")
+            Entry = (x, y)
+
         elif a.upper() == "EXIT":
+            if "," not in b:
+                raise ValueError("ERROR: The point must seperated by (,)")
             c, d = b.split(",")
             try:
-                Exit = (int(c), int(d))
+                x, y = (int(c), int(d))
             except ValueError:
                 raise ValueError("ERROR: EXIT point must be a tuple of intgets , (int, int) !!")
+            if Cols == None or Rows == None:
+                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT before the EXIT point !!")
+            if x <= 0 or y <= 0:
+                raise ValueError("ERROR: Exit point must be a tuple of positive intgets , (int > 0, int > 0) !!")
+            if x > Rows or y > Cols:
+                raise ValueError("ERROR: Exit point must be a tuple of positive intgets , (int < rows, int < cols) !!")
+            if Entry != None and Entry[0] == x and Entry[1] == y:
+                raise ValueError("ERROR: Entry point and Exsit point cann't be the same")
+            Exit = (x, y)
+
         elif a.upper() == "OUTPUT_FILE":
             Output_file = b
         elif a.upper() == "PERFECT":
-            Perfect = True if b.upper() == "TRUE" else False
+            if b.upper() == "TRUE":
+                Perfect = True
+            elif b.upper() == "FALSE":
+                Perfect = False
+            else:
+                raise ValueError(f"ERROR: Perfect must be True or False not ({b}) !!")
         elif a.upper() == "SEED":
             try:
                 Seed = int(b)
