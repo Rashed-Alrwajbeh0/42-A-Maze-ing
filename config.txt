@@ -1,0 +1,6 @@
+width = 10
+hEiGHt = 10
+ENTRY =1, 1
+EXIT=  1,2             
+OUTPuT_FILE =  Rashed
+pErFect= True

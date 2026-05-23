@@ -15,7 +15,7 @@ def print_grid(cells, rows, cols):
                 for j in range(cols):
                     n = i + j
                     if cells[n].has_mid:
-                        string += "##"
+                        string += "#0"
                     elif cells[n].West:
                         string +="# "
                     else:

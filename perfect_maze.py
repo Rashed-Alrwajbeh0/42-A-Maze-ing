@@ -44,7 +44,9 @@ def make_42(Cells, visited, rows, cols):
     Cells[idx + 3 + 3 * cols].has_mid = True
     visited.add(idx + 3 + 3 * cols)
 
-def create_maze(rows, cols, start_point, end_point):
+def create_maze(rows, cols, start_point, end_point, seed = None):
+    if seed:
+        random.seed(seed)
     Cells = []
     Ans = []
     visited = set()
@@ -60,7 +62,6 @@ def create_maze(rows, cols, start_point, end_point):
         make_42(Cells, visited, rows, cols)
     else:
         print("ERROR: The 42 patern cannot printed in the middle of the maze, because the maze is to small")
-
     path = [idx1]
     while path:
         temp = ['E', 'W', 'N', 'S']
