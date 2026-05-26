@@ -1,12 +1,13 @@
 class cell:
-    def __init__(self, E: int, W: int, N: int, S: int, Point: tuple[int, int]) -> None:
+    def __init__(self, E: int, W: int, N: int, S: int,
+                 Point: tuple[int, int]) -> None:
         self.East = E
         self.West = W
         self.North = N
         self.South = S
         self.Point = Point
         self.has_mid = False
-    
+
     def change_to_Hex(self) -> str:
         Hex_nums = "0123456789ABCDEF"
         idx = 0
@@ -19,6 +20,8 @@ class cell:
         if self.West:
             idx += 8
         return Hex_nums[idx]
+
+
 Rows = None
 Cols = None
 Entry = None
@@ -27,15 +30,20 @@ Output_file = None
 Perfect = None
 Seed = None
 
+
 def get_confing() -> bool | Exception:
     import sys
     argv = sys.argv
     if len(argv) > 2:
-        raise FileNotFoundError("ERROR: a_maze_ing.py and config.txt are must just exist, but you enter more !!")
+        raise FileNotFoundError("ERROR: a_maze_ing.py and config.txt are must"
+                                " just exist, but you enter more !!")
     elif len(argv) < 2:
-        raise FileNotFoundError("Error: a_maze_ing.py and config.txt are must exist, but you didn't enter config.txt !!")
+        raise FileNotFoundError("Error: a_maze_ing.py and config.txt are "
+                                "must exist, but you didn't enter"
+                                " config.txt !!")
     elif argv[1] != "config.txt":
-        raise FileNotFoundError("ERROR: config.txt must exist, it isn't found !!")
+        raise FileNotFoundError("ERROR: config.txt must exist, "
+                                "it isn't found !!")
     file = open(argv[1], "r")
     global Rows, Cols, Entry, Exit, Output_file, Perfect, Seed
     content = file.read().strip().split("\n")
@@ -44,7 +52,8 @@ def get_confing() -> bool | Exception:
         if i and i[0] == "#" or i == "":
             continue
         if "=" not in i:
-            raise ValueError("ERROR: Garbage values in config.txt, it must contain KEY = VALUE !!")
+            raise ValueError("ERROR: Garbage values in config.txt,"
+                             " it must contain KEY = VALUE !!")
         aa, bb = i.split("=")
         a = aa.strip()
         b = bb.strip()
@@ -52,7 +61,8 @@ def get_confing() -> bool | Exception:
             try:
                 n = int(b)
                 if n <= 0:
-                    raise ValueError("ERROR: HEIGHT must be a positive integer !!")
+                    raise ValueError("ERROR: HEIGHT must be a "
+                                     "positive integer !!")
                 Cols = n
             except ValueError:
                 raise ValueError("ERROR: HEIGHT must be a positive integer !!")
@@ -60,7 +70,8 @@ def get_confing() -> bool | Exception:
             try:
                 n = int(b)
                 if n <= 0:
-                    raise ValueError("ERROR: WIDTH must be a positive integer !!")
+                    raise ValueError("ERROR: WIDTH must be a positive"
+                                     " integer !!")
                 Rows = n
             except ValueError:
                 raise ValueError("ERROR: WIDTH must be a positive integer !!")
@@ -71,15 +82,21 @@ def get_confing() -> bool | Exception:
             try:
                 x, y = (int(c), int(d))
             except ValueError:
-                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int, int) !!")
-            if Cols == None or Rows == None:
-                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT before the Entry point !!")
+                raise ValueError("ERROR: Entry point must be a tuple of "
+                                 "positive intgets , (int, int) !!")
+            if Cols is None or Rows is None:
+                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT "
+                                 "before the Entry point !!")
             if x <= 0 or y <= 0:
-                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int > 0, int > 0) !!")
+                raise ValueError("ERROR: Entry point must be a tuple of "
+                                 "positive intgets , (int > 0, int > 0) !!")
             if x > Rows or y > Cols:
-                raise ValueError("ERROR: Entry point must be a tuple of positive intgets , (int < rows, int < cols) !!")
-            if Exit != None and Exit[0] == x and Exit[1] == y:
-                raise ValueError("Error: Entry point and Exsit point cann't be the same")
+                raise ValueError("ERROR: Entry point must be a tuple of "
+                                 "positive intgets , (int < rows, int < cols)"
+                                 " !!")
+            if Exit is not None and Exit[0] == x and Exit[1] == y:
+                raise ValueError("Error: Entry point and Exsit point cann't"
+                                 " be the same")
             Entry = (x, y)
 
         elif a.upper() == "EXIT":
@@ -89,15 +106,21 @@ def get_confing() -> bool | Exception:
             try:
                 x, y = (int(c), int(d))
             except ValueError:
-                raise ValueError("ERROR: EXIT point must be a tuple of intgets , (int, int) !!")
-            if Cols == None or Rows == None:
-                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT before the EXIT point !!")
+                raise ValueError("ERROR: EXIT point must be a tuple of "
+                                 "intgets , (int, int) !!")
+            if Cols is None or Rows is None:
+                raise ValueError("ERROR: You must enter the WIDTH and HEIGHT "
+                                 "before the EXIT point !!")
             if x <= 0 or y <= 0:
-                raise ValueError("ERROR: Exit point must be a tuple of positive intgets , (int > 0, int > 0) !!")
+                raise ValueError("ERROR: Exit point must be a tuple of "
+                                 "positive intgets , (int > 0, int > 0) !!")
             if x > Rows or y > Cols:
-                raise ValueError("ERROR: Exit point must be a tuple of positive intgets , (int < rows, int < cols) !!")
-            if Entry != None and Entry[0] == x and Entry[1] == y:
-                raise ValueError("ERROR: Entry point and Exsit point cann't be the same")
+                raise ValueError("ERROR: Exit point must be a tuple of "
+                                 "positive intgets , (int < rows, int < cols)"
+                                 " !!")
+            if Entry is not None and Entry[0] == x and Entry[1] == y:
+                raise ValueError("ERROR: Entry point and Exsit"
+                                 " point cann't be the same")
             Exit = (x, y)
 
         elif a.upper() == "OUTPUT_FILE":
@@ -108,14 +131,16 @@ def get_confing() -> bool | Exception:
             elif b.upper() == "FALSE":
                 Perfect = False
             else:
-                raise ValueError(f"ERROR: Perfect must be True or False not ({b}) !!")
+                raise ValueError("ERROR: Perfect must be True or "
+                                 f"False not ({b}) !!")
         elif a.upper() == "SEED":
             try:
                 Seed = int(b)
             except ValueError:
                 raise ValueError("ERROR: SEED must be an integer !!")
         else:
-            raise ValueError(f"Error: This key({a}) and value({b}) are not supported")
+            raise ValueError(f"Error: This key({a}) and value({b})"
+                             " are not supported")
     if not Cols:
         raise ValueError("ERROR: HEIGHT is mandatory !!")
     elif not Rows:
@@ -126,8 +151,9 @@ def get_confing() -> bool | Exception:
         raise ValueError("ERROR: EXIT is mandatory !!")
     elif not Output_file:
         raise ValueError("ERROR: OUTPUT_FILE is mandatory !!")
-    elif Perfect == None:
+    elif Perfect is None:
         raise ValueError("ERROR: PERFECT is mandatory !!")
     return True
+
 
 __all__ = ["cell", "get_confing"]

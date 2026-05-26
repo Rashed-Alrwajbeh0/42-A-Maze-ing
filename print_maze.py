@@ -1,9 +1,8 @@
 from properties import cell
 
 
-
 def print_grid(cells: list[cell], rows: int, cols: int) -> None:
-    for i in range (0,rows*cols, cols):
+    for i in range(0, rows * cols, cols):
         string = ""
         for z in range(4):
             if z == 0:
@@ -21,7 +20,7 @@ def print_grid(cells: list[cell], rows: int, cols: int) -> None:
                     if cells[n].has_mid:
                         string += "#0"
                     elif cells[n].West:
-                        string +="# "
+                        string += "# "
                     else:
                         string += "  "
             elif z == 2:
@@ -56,4 +55,3 @@ def make_output(cells: list[cell], ans: list[str], start: tuple[int, int],
         for ii in ans:
             file.write(ii)
         file.write("\n")
-

@@ -4,22 +4,24 @@ from non_perfect_maze import create_maze as none_perfect
 import properties
 
 
-
 try:
     properties.get_confing()
     perfect_ = properties.Perfect
-    rows = properties.Rows if properties.Rows != None else 0
-    cols = properties.Cols if properties.Cols != None else 0
-    start = properties.Entry if properties.Entry != None else (0, 0)
-    end = properties.Exit if properties.Exit != None else (0, 0)
+    rows = properties.Rows if properties.Rows is not None else 0
+    cols = properties.Cols if properties.Cols is not None else 0
+    start = properties.Entry if properties.Entry is not None else (0, 0)
+    end = properties.Exit if properties.Exit is not None else (0, 0)
     seed = properties.Seed
-    out_file = properties.Output_file
+    if properties.Output_file is None:
+        OutFile = "NO_Please"
+    else:
+        OutFile = properties.Output_file
     if perfect_:
         Cells, answer = perfect(rows, cols, start, end, seed)
     else:
         Cells = none_perfect(rows, cols, start, end, seed)
     print_grid(Cells, rows, cols)
-    #make_output(Cells, answer,  start, end, cols, rows, out_file)
+    make_output(Cells, answer,  start, end, cols, rows, OutFile)
 
 except (FileNotFoundError, ValueError) as e:
     print(e)

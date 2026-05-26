@@ -2,7 +2,8 @@ import random
 from properties import cell
 
 
-def make_42(Cells: list[cell], visited: list[int], rows: int, cols: int) -> None:
+def make_42(Cells: list[cell], visited: list[int],
+            rows: int, cols: int) -> None:
     n = cols // 2 - 1
     m = rows // 2 - 1
     idx = cols * m + n
@@ -44,19 +45,20 @@ def make_42(Cells: list[cell], visited: list[int], rows: int, cols: int) -> None
     Cells[idx + 3 + 3 * cols].has_mid = True
     visited.append(idx + 3 + 3 * cols)
 
+
 def create_maze(rows: int, cols: int, start_point: tuple[int, int],
-                end_point: tuple[int, int], seed: int | None = None) -> list[cell]:
-    if seed != None:
+                end_point: tuple[int, int],
+                seed: int | None = None) -> list[cell]:
+    if seed is None:
         random.seed(seed)
     Cells = []
     visited = []
-    find_end = False
     for i in range(rows):
         for j in range(cols):
             Cells.append(cell(1, 1, 1, 1, (i, j)))
 
     idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
-    idx2 = cols* (end_point[0] - 1) + (end_point[1] - 1)
+    idx2 = cols * (end_point[0] - 1) + (end_point[1] - 1)
     if start_point[1] != cols:
         Cells[idx1].East = 0
         Cells[idx1 + 1].West = 0
@@ -73,7 +75,8 @@ def create_maze(rows: int, cols: int, start_point: tuple[int, int],
     if cols > 7 and rows > 5:
         make_42(Cells, visited, rows, cols)
     else:
-        print("ERROR: The 42 patern cannot printed in the middle of the maze, because the maze is to small")
+        print("ERROR: The 42 patern cannot printed in the "
+              "middle of the maze, because the maze is to small")
     path = [idx1]
     while path:
         temp = ['E', 'W', 'N', 'S']
@@ -119,8 +122,6 @@ def create_maze(rows: int, cols: int, start_point: tuple[int, int],
                 idx1 -= cols
             visited.append(idx1)
             path.append(idx1)
-            if idx1 == idx2:
-                find_end = True
         else:
             path.pop()
             if path:
