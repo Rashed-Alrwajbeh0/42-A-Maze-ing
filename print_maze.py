@@ -1,4 +1,8 @@
-def print_grid(cells, rows, cols):
+from properties import cell
+
+
+
+def print_grid(cells: list[cell], rows: int, cols: int) -> None:
     for i in range (0,rows*cols, cols):
         string = ""
         for z in range(4):
@@ -36,7 +40,9 @@ def print_grid(cells, rows, cols):
             print("#")
 
 
-def make_output(cells, ans, start, end, cols, rows, out_file):
+def make_output(cells: list[cell], ans: list[str], start: tuple[int, int],
+                end: tuple[int, int], cols: int, rows: int,
+                out_file: str) -> None:
     with open(out_file, "w") as file:
         for i in range(rows):
             for j in range(cols):
@@ -47,7 +53,7 @@ def make_output(cells, ans, start, end, cols, rows, out_file):
 
         file.write(f"{start[0]}, {start[1]}\n")
         file.write(f"{end[0]}, {end[1]}\n")
-        for i in ans:
-            file.write(i)
+        for ii in ans:
+            file.write(ii)
         file.write("\n")
 

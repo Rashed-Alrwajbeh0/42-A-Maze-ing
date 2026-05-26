@@ -2,7 +2,7 @@ import random
 from properties import cell
 
 
-def make_42(Cells, visited, rows, cols):
+def make_42(Cells: list[cell], visited: set[int], rows: int, cols: int) -> None:
     n = cols // 2 - 1
     m = rows // 2 - 1
     idx = cols * m + n
@@ -44,7 +44,8 @@ def make_42(Cells, visited, rows, cols):
     Cells[idx + 3 + 3 * cols].has_mid = True
     visited.add(idx + 3 + 3 * cols)
 
-def create_maze(rows, cols, start_point, end_point, seed = None):
+def create_maze(rows: int, cols: int, start_point: tuple[int, int],
+                end_point: tuple[int, int], seed: int | None = None) -> tuple[list[cell], list[str]]:
     if seed != None:
         random.seed(seed)
     Cells = []

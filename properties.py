@@ -1,5 +1,5 @@
 class cell:
-    def __init__(self, E, W, N, S, Point: tuple):
+    def __init__(self, E: int, W: int, N: int, S: int, Point: tuple[int, int]) -> None:
         self.East = E
         self.West = W
         self.North = N
@@ -7,7 +7,7 @@ class cell:
         self.Point = Point
         self.has_mid = False
     
-    def change_to_Hex(self):
+    def change_to_Hex(self) -> str:
         Hex_nums = "0123456789ABCDEF"
         idx = 0
         if self.North:
@@ -27,7 +27,7 @@ Output_file = None
 Perfect = None
 Seed = None
 
-def get_confing():
+def get_confing() -> bool | Exception:
     import sys
     argv = sys.argv
     if len(argv) > 2:
