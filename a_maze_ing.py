@@ -19,7 +19,7 @@ try:
     if perfect_:
         Cells, answer = perfect(rows, cols, start, end, seed)
     else:
-        Cells = none_perfect(rows, cols, start, end, seed)
+        Cells, answer = none_perfect(rows, cols, start, end, seed)
     print_grid(Cells, rows, cols)
     make_output(Cells, answer,  start, end, cols, rows, OutFile)
 

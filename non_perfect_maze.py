@@ -2,6 +2,67 @@ import random
 from properties import cell
 
 
+cell_map: dict[tuple[int, int], cell] = dict()
+
+
+def get_neighbors(c: cell) -> list[tuple[cell, str]]:
+    row, col = c.Point
+    neighbors = []
+
+    if c.East == 0:
+        neighbors.append((cell_map[(row, col + 1)], "E"))
+
+    if c.West == 0:
+        neighbors.append((cell_map[(row, col - 1)], "W"))
+
+    if c.North == 0:
+        neighbors.append((cell_map[(row - 1, col)], "N"))
+
+    if c.South == 0:
+        neighbors.append((cell_map[(row + 1, col)], "S"))
+
+    return neighbors
+
+
+def solve(cells: list[cell], start: cell,
+          end: cell) -> list[str]:
+    queue: list[cell] = []
+    visited: set[cell] = set()
+    path: list[str] = []
+    parent: dict[cell, cell | None] = {
+        start: None
+    }
+    where_from: dict[cell, str] = dict()
+    global cell_map
+    cell_map = {cell.Point: cell for cell in cells}
+
+    queue.append(start)
+    visited.add(start)
+
+    while queue:
+        current = queue.pop(0)
+
+        if current is end:
+            break
+
+        neighbors = get_neighbors(current)
+        for n in neighbors:
+            if n[0] not in visited:
+                parent[n[0]] = current
+                queue.append(n[0])
+                visited.add(n[0])
+                where_from[n[0]] = n[1]
+
+    current = end
+    while current != start:
+        path.append(where_from[current])
+        current = parent[current]
+
+    path.reverse()
+    return path
+
+
+
 def make_42(Cells: list[cell], visited: list[int],
             rows: int, cols: int) -> None:
     n = cols // 2 - 1
@@ -46,9 +107,11 @@ def make_42(Cells: list[cell], visited: list[int],
     visited.append(idx + 3 + 3 * cols)
 
 
-def create_maze(rows: int, cols: int, start_point: tuple[int, int],
+def create_maze(rows: int,
+                cols: int,
+                start_point: tuple[int, int],
                 end_point: tuple[int, int],
-                seed: int | None = None) -> list[cell]:
+                seed: int | None = None) -> tuple[list[cell], list[str]]:
     if seed is None:
         random.seed(seed)
     Cells = []
@@ -126,4 +189,6 @@ def create_maze(rows: int, cols: int, start_point: tuple[int, int],
             path.pop()
             if path:
                 idx1 = path[-1]
-    return Cells
+    idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
+    idx2 = cols * (end_point[0] - 1) + (end_point[1] - 1)
+    return Cells, solve(Cells, Cells[idx1], Cells[idx2])

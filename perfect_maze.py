@@ -117,6 +117,8 @@ def create_maze(rows: int, cols: int, start_point: tuple[int, int],
             path.append(idx1)
             if idx1 == idx2:
                 find_end = True
+                for i in path:
+                    Cells[i].is_answer = True
         else:
             path.pop()
             if path:

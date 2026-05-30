@@ -7,6 +7,7 @@ class cell:
         self.South = S
         self.Point = Point
         self.has_mid = False
+        self.is_answer = False
 
     def change_to_Hex(self) -> str:
         Hex_nums = "0123456789ABCDEF"
