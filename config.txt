@@ -1,7 +1,7 @@
 WIDTH=18
 OUTPUT_FILE=Rashed
 HEIGHT=56
-EXIT=17,17             
+EXIT=18,56             
 ENTRY=1,1
 PERFECT=true
-#SEED=0
+#SEED=2

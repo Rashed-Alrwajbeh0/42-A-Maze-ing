@@ -49,8 +49,7 @@ def make_42(Cells: list[cell], visited: set[int],
 def create_maze(rows: int, cols: int, start_point: tuple[int, int],
                 end_point: tuple[int, int],
                 seed: int | None = None) -> tuple[list[cell], list[str]]:
-    if seed is None:
-        random.seed(seed)
+    random.seed(seed)
     Cells = []
     Ans = []
     visited = set()

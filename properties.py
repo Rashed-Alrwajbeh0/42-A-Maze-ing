@@ -51,6 +51,8 @@ def get_confing() -> bool | Exception:
     for ii in content:
         i = ii.strip()
         if i and i[0] == "#" or i == "":
+            if "SEED" in i.upper():
+                Seed = None
             continue
         if "=" not in i:
             raise ValueError("ERROR: Garbage values in config.txt,"

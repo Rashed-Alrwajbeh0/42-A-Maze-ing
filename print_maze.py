@@ -4,11 +4,11 @@ def print_grid(
     cells: list[cell],
     rows: int,
     cols: int,
-    maze_color: str = "\033[36m",
-    answer_color: str = "\033[37m",
-    mid_color: str = "\033[31m",
+    maze_color: str,
+    answer_color: str
 ) -> None:
 
+    mid_color: str = "\033[31m"
     RESET = "\033[0m"
 
     def idx(r: int, c: int) -> int:
@@ -39,7 +39,10 @@ def print_grid(
                     left = cells[idx(r, c - 1)]
 
                     if cur.is_answer and left.is_answer:
-                        line += answer_color + "█"
+                        if answer_color != "\033[0m":
+                            line += answer_color + "█"
+                        else:
+                            line += "█"
                     else:
                         line += " "
                 else:
