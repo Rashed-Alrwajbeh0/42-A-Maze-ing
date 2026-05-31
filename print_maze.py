@@ -1,5 +1,6 @@
 from properties import cell
 
+
 def print_grid(
     cells: list[cell],
     rows: int,
@@ -38,7 +39,8 @@ def print_grid(
                 if c > 0:
                     left = cells[idx(r, c - 1)]
 
-                    if cur.is_answer and left.is_answer and answer_color != "\033[30m":
+                    if (cur.is_answer and left.is_answer
+                            and answer_color != "\033[30m"):
                         line += answer_color + "█"
                     else:
                         line += " "
@@ -82,7 +84,8 @@ def print_grid(
                 if cur.South:
                     line += maze_color + "█"
                 else:
-                    if cur.is_answer and below.is_answer and answer_color != "\033[30m":
+                    if (cur.is_answer and below.is_answer and
+                            answer_color != "\033[30m"):
                         line += answer_color + "█"
                     else:
                         line += " "

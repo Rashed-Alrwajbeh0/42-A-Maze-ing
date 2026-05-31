@@ -61,7 +61,7 @@ def get_confing() -> bool | Exception:
         aa, bb = i.split("=")
         a = aa.strip()
         b = bb.strip()
-        if a.upper() == "HEIGHT":
+        if a.upper() == "WIDTH":
             try:
                 n = int(b)
                 if n <= 0:
@@ -70,7 +70,7 @@ def get_confing() -> bool | Exception:
                 Cols = n
             except ValueError:
                 raise ValueError("ERROR: HEIGHT must be a positive integer !!")
-        elif a.upper() == "WIDTH":
+        elif a.upper() == "HEIGHT":
             try:
                 n = int(b)
                 if n <= 0:

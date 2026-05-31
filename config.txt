@@ -1,7 +1,7 @@
-WIDTH=15
+WIDTH=50
 OUTPUT_FILE=Rashed
-HEIGHT=50
-EXIT=15,30             
+HEIGHT=15
+EXIT=15,50             
 ENTRY=1,1
-PERFECT=true
-#SEED=
+PERFECT=false
+#SEED=50

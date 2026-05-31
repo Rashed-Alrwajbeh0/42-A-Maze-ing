@@ -5,7 +5,9 @@ from properties import cell
 cell_map: dict[tuple[int, int], cell] = dict()
 
 
-def get_neighbors(c: cell) -> list[tuple[cell, str]]:
+def get_neighbors(c: cell | None) -> list[tuple[cell, str]]:
+    if c is None:
+        return []
     row, col = c.Point
     neighbors = []
 
@@ -29,10 +31,10 @@ def solve(cells: list[cell], start: cell,
     queue: list[cell] = []
     visited: set[cell] = set()
     path: list[str] = []
-    parent: dict[cell, cell | None] = {
+    parent: dict[cell | None, cell | None] = {
         start: None
     }
-    where_from: dict[cell, str] = dict()
+    where_from: dict[cell | None, str] = dict()
     global cell_map
     cell_map = {cell.Point: cell for cell in cells}
 
@@ -40,7 +42,7 @@ def solve(cells: list[cell], start: cell,
     visited.add(start)
 
     while queue:
-        current = queue.pop(0)
+        current: cell | None = queue.pop(0)
 
         if current is end:
             break
@@ -58,10 +60,10 @@ def solve(cells: list[cell], start: cell,
     while current != start:
         path.append(where_from[current])
         current = parent[current]
-        current.is_answer = True
+        if current is not None:
+            current.is_answer = True
     path.reverse()
     return path
-
 
 
 def make_42(Cells: list[cell], visited: list[int],
@@ -134,6 +136,19 @@ def create_maze(rows: int,
     if start_point[0] != rows:
         Cells[idx1].South = 0
         Cells[idx1 + cols].North = 0
+    if end_point[1] != cols:
+        Cells[idx2].East = 0
+        Cells[idx2 + 1].West = 0
+    if end_point[1] != 1:
+        Cells[idx2].West = 0
+        Cells[idx2 - 1].East = 0
+    if end_point[0] != 1:
+        Cells[idx2].North = 0
+        Cells[idx2 - cols].South = 0
+    if end_point[0] != rows:
+        Cells[idx2].South = 0
+        Cells[idx2 + cols].North = 0
+
     visited.append(idx1)
     if cols > 7 and rows > 5:
         make_42(Cells, visited, rows, cols)
@@ -191,7 +206,6 @@ def create_maze(rows: int,
                 idx1 = path[-1]
     idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
     idx2 = cols * (end_point[0] - 1) + (end_point[1] - 1)
-    
     Cells[idx1].special_point = True
     Cells[idx2].special_point = True
     return Cells, solve(Cells, Cells[idx1], Cells[idx2])

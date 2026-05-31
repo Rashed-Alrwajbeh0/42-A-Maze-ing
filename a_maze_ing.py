@@ -1,13 +1,10 @@
-#from print_maze import print_grid, make_output
-#from perfect_maze import create_maze as perfect
-#from non_perfect_maze import create_maze as none_perfect
 import properties
 import os
 import random as ran
 from Generator import MazeGenerator
 
 
-def solve():
+def solve() -> None:
     try:
         properties.get_confing()
         perfect_ = properties.Perfect
@@ -25,8 +22,10 @@ def solve():
             OutFile = properties.Output_file
         generater = MazeGenerator()
         finish = False
-        colors = ["\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m"]
+        colors = ["\033[32m", "\033[33m", "\033[34m", "\033[36m"]
         color = 0
+        if perfect_ is None:
+            return
         generater.Creatre_Maze(rows, cols, start, end, seed, perfect_)
         generater.print_the_maze(colors[color % len(colors)], "\033[30m")
         generater.make_output(OutFile)
@@ -49,11 +48,13 @@ def solve():
                     path_color = "\033[30m"
                 path = not path
                 os.system('clear')
-                generater.print_the_maze(colors[color % len(colors)], path_color)
+                generater.print_the_maze(colors[color % len(colors)],
+                                         path_color)
             elif num.strip() == "3":
                 os.system('clear')
                 color += 1
-                generater.print_the_maze(colors[color % len(colors)], path_color)
+                generater.print_the_maze(colors[color % len(colors)],
+                                         path_color)
             elif num == "4":
                 os._exit(0)
             else:
