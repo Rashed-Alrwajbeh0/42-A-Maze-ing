@@ -28,7 +28,7 @@ def solve():
         colors = ["\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m"]
         color = 0
         generater.Creatre_Maze(rows, cols, start, end, seed, perfect_)
-        generater.print_the_maze(colors[color % len(colors)], "\033[0m")
+        generater.print_the_maze(colors[color % len(colors)], "\033[30m")
         generater.make_output(OutFile)
         path = False
         path_color = "\033[0m"
@@ -40,12 +40,13 @@ def solve():
             print("4. Quit")
             num = input("Choice?  (1-4): ")
             if num.strip() == "1":
+                os.system('clear')
                 solve()
             elif num.strip() == "2":
                 if not path:
-                    path_color = "\033[30m"
-                else:
                     path_color = "\033[0m"
+                else:
+                    path_color = "\033[30m"
                 path = not path
                 os.system('clear')
                 generater.print_the_maze(colors[color % len(colors)], path_color)

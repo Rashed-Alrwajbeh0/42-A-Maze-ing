@@ -54,10 +54,11 @@ def solve(cells: list[cell], start: cell,
                 where_from[n[0]] = n[1]
 
     current = end
+    current.is_answer = True
     while current != start:
         path.append(where_from[current])
         current = parent[current]
-
+        current.is_answer = True
     path.reverse()
     return path
 
@@ -190,4 +191,7 @@ def create_maze(rows: int,
                 idx1 = path[-1]
     idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
     idx2 = cols * (end_point[0] - 1) + (end_point[1] - 1)
+    
+    Cells[idx1].special_point = True
+    Cells[idx2].special_point = True
     return Cells, solve(Cells, Cells[idx1], Cells[idx2])

@@ -60,6 +60,8 @@ def create_maze(rows: int, cols: int, start_point: tuple[int, int],
 
     idx1 = cols * (start_point[0] - 1) + (start_point[1] - 1)
     idx2 = cols * (end_point[0] - 1) + (end_point[1] - 1)
+    Cells[idx1].special_point = True
+    Cells[idx2].special_point = True
     visited.add(idx1)
     if cols > 7 and rows > 5:
         make_42(Cells, visited, rows, cols)

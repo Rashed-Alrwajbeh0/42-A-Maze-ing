@@ -38,7 +38,7 @@ def print_grid(
                 if c > 0:
                     left = cells[idx(r, c - 1)]
 
-                    if cur.is_answer and left.is_answer:
+                    if cur.is_answer and left.is_answer and answer_color != "\033[30m":
                         line += answer_color + "█"
                     else:
                         line += " "
@@ -46,7 +46,9 @@ def print_grid(
                     line += " "
 
             # Cell interior
-            if cur.is_answer:
+            if cur.special_point:
+                line += mid_color + "█"
+            elif cur.is_answer and answer_color != "\033[30m":
                 line += answer_color + "█"
 
             elif cur.has_mid:
@@ -80,7 +82,7 @@ def print_grid(
                 if cur.South:
                     line += maze_color + "█"
                 else:
-                    if cur.is_answer and below.is_answer:
+                    if cur.is_answer and below.is_answer and answer_color != "\033[30m":
                         line += answer_color + "█"
                     else:
                         line += " "
