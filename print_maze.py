@@ -39,10 +39,7 @@ def print_grid(
                     left = cells[idx(r, c - 1)]
 
                     if cur.is_answer and left.is_answer:
-                        if answer_color != "\033[0m":
-                            line += answer_color + "█"
-                        else:
-                            line += "█"
+                        line += answer_color + "█"
                     else:
                         line += " "
                 else:

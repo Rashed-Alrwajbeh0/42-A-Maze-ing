@@ -43,7 +43,7 @@ def solve():
                 solve()
             elif num.strip() == "2":
                 if not path:
-                    path_color = "\033[37m"
+                    path_color = "\033[30m"
                 else:
                     path_color = "\033[0m"
                 path = not path
