@@ -3,5 +3,5 @@ OUTPUT_FILE=Rashed
 HEIGHT=15
 EXIT=15,50             
 ENTRY=1,1
-PERFECT=True
+PERFECT=False
 #SEED=50

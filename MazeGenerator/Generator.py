@@ -5,7 +5,13 @@ from properties import cell
 
 
 class MazeGenerator:
+    """A class for maze generation.
+    required by the subject.
+    """
+
     def __init__(self) -> None:
+        """Initalization"""
+
         self.rows: int | None = None
         self.cols: int | None = None
         self.start_point: tuple[int, int] | None = None
@@ -18,6 +24,8 @@ class MazeGenerator:
     def Creatre_Maze(self, Rows: int, Cols: int, Start: tuple[int, int],
                      End: tuple[int, int], Seed: int,
                      Perfect: bool) -> None:
+        """Maze creation"""
+
         self.rows = Rows
         self.cols = Cols
         self.start_point = Start
@@ -39,6 +47,8 @@ class MazeGenerator:
                                                               self.seed)
 
     def print_the_maze(self, MazeColor: str, PathColor: str) -> None:
+        """Printing maze"""
+
         if (self.TheMaze is not None and
                 self.rows is not None and
                 self.cols is not None):
@@ -49,6 +59,8 @@ class MazeGenerator:
                        PathColor)
 
     def make_output(self, out_file: str) -> None:
+        """Generate output file"""
+
         if self.rows is None or self.cols is None or self.TheMaze is None:
             return
         with open(out_file, "w") as file:

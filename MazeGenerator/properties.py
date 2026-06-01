@@ -1,6 +1,10 @@
 class cell:
+    """Class for cells"""
+
     def __init__(self, E: int, W: int, N: int, S: int,
                  Point: tuple[int, int]) -> None:
+        """Initialization"""
+
         self.East = E
         self.West = W
         self.North = N
@@ -11,6 +15,8 @@ class cell:
         self.special_point = False
 
     def change_to_Hex(self) -> str:
+        """Print info as hex"""
+
         Hex_nums = "0123456789ABCDEF"
         idx = 0
         if self.North:
@@ -34,6 +40,8 @@ Seed = None
 
 
 def get_confing() -> bool | Exception:
+    """Function to get config.txt"""
+
     import sys
     argv = sys.argv
     if len(argv) > 2:

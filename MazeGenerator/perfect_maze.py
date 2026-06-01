@@ -4,6 +4,8 @@ from properties import cell
 
 def make_42(Cells: list[cell], visited: set[int],
             rows: int, cols: int) -> None:
+    """Draw 42 in the middle"""
+
     n = cols // 2 - 1
     m = rows // 2 - 1
     idx = cols * m + n
@@ -49,6 +51,8 @@ def make_42(Cells: list[cell], visited: set[int],
 def create_maze(rows: int, cols: int, start_point: tuple[int, int],
                 end_point: tuple[int, int],
                 seed: int | None = None) -> tuple[list[cell], list[str]]:
+    """Create a perfect maze"""
+
     random.seed(seed)
     Cells = []
     Ans = []

@@ -1,10 +1,12 @@
-import properties
+import MazeGenerator
 import os
 import random as ran
-from Generator import MazeGenerator
 
 
 def solve() -> None:
+    """Main function.
+    main loop.
+    """
     try:
         properties.get_confing()
         perfect_ = properties.Perfect
@@ -64,4 +66,5 @@ def solve() -> None:
         os._exit(0)
 
 
-solve()
+if __name__ == "__main__":
+    solve()

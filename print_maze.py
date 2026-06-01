@@ -1,4 +1,4 @@
-from properties import cell
+from MazeGenerator import cell
 
 
 def print_grid(
@@ -8,6 +8,7 @@ def print_grid(
     maze_color: str,
     answer_color: str
 ) -> None:
+    """Print Maze"""
 
     mid_color: str = "\033[31m"
     RESET = "\033[0m"
@@ -32,7 +33,6 @@ def print_grid(
 
             cur = cells[idx(r, c)]
 
-            # West wall / corridor
             if cur.West:
                 line += maze_color + "█"
             else:
@@ -47,7 +47,6 @@ def print_grid(
                 else:
                     line += " "
 
-            # Cell interior
             if cur.special_point:
                 line += mid_color + "█"
             elif cur.is_answer and answer_color != "\033[30m":
@@ -59,7 +58,6 @@ def print_grid(
             else:
                 line += maze_color + " "
 
-        # East border
         last = cells[idx(r, cols - 1)]
 
         if last.East:
@@ -69,7 +67,6 @@ def print_grid(
 
         print(line)
 
-        # Draw vertical connections
         if r < rows - 1:
 
             line = ""
@@ -94,7 +91,6 @@ def print_grid(
 
             print(line)
 
-    # Bottom border
     print("█", end="")
     for c in range(cols):
         cur = cells[idx(rows - 1, c)]
