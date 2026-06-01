@@ -1,6 +1,7 @@
 """MazeGenerator package for maze generation algorithms.
 
-A comprehensive Python package for generating perfect and non-perfect mazes using
+A comprehensive Python package for generating
+perfect and non-perfect mazes using
 depth-first search (recursive backtracker) and breadth-first search algorithms.
 
 This package provides both low-level functions for direct maze generation and a
@@ -8,8 +9,10 @@ high-level MazeGenerator class for convenient maze creation and manipulation.
 
 Modules:
     - Generator: Main MazeGenerator class for maze creation and output
-    - perfect_maze: Functions for generating perfect mazes (single solution path)
-    - non_perfect_maze: Functions for generating non-perfect mazes with BFS solving
+    - perfect_maze: Functions for generating
+    perfect mazes (single solution path)
+    - non_perfect_maze: Functions for
+    generating non-perfect mazes with BFS solving
     - properties: Cell class representing individual maze cells
     - print_maze: Terminal rendering functions for maze visualization
 
