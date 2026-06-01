@@ -308,3 +308,10 @@ All generated content was reviewed, tested, and understood before integration.
 - google
 
 ---
+
+
+# How to use MazeGenerator package
+
+```
+    pip install mazegen*.whl
+```

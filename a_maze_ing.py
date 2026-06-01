@@ -12,7 +12,11 @@ def solve() -> None:
         perfect_ = mg.properties.Perfect
         rows = mg.properties.Rows if mg.properties.Rows is not None else 0
         cols = mg.properties.Cols if mg.properties.Cols is not None else 0
-        start = mg.properties.Entry if mg.properties.Entry is not None else (0, 0)
+        if mg.properties.Entry is not None:
+            start = mg.properties.Entry
+        else:
+            start = (0, 0)
+
         end = mg.properties.Exit if mg.properties.Exit is not None else (0, 0)
         if mg.properties.Seed is not None:
             seed = mg.properties.Seed
