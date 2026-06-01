@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "abdothma, ralrawaj", email = ""}
+    {name = "abdothma, ralrawaj", email = "anon@none.com"}
 ]
 keywords = ["maze", "generation", "algorithm", "perfect-maze", "recursive-backtracker"]
 classifiers = [
