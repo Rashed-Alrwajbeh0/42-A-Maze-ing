@@ -1,5 +1,5 @@
 import random
-from properties import cell
+from .properties import cell
 
 
 cell_map: dict[tuple[int, int], cell] = dict()

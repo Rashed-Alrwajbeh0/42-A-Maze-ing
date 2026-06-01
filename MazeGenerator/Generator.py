@@ -1,7 +1,7 @@
-from perfect_maze import create_maze as perfect_maze
-from non_perfect_maze import create_maze as imperfect_maze
-from print_maze import print_grid
-from properties import cell
+from .perfect_maze import create_maze as perfect_maze
+from .non_perfect_maze import create_maze as imperfect_maze
+from .print_maze import print_grid
+from .properties import cell
 
 
 class MazeGenerator:

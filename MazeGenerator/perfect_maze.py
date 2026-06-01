@@ -1,5 +1,5 @@
 import random
-from properties import cell
+from .properties import cell
 
 
 def make_42(Cells: list[cell], visited: set[int],

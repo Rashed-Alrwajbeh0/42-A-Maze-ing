@@ -1,4 +1,4 @@
-from MazeGenerator import cell
+from .properties import cell
 
 
 def print_grid(

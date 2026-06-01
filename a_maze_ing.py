@@ -1,4 +1,4 @@
-import MazeGenerator
+import MazeGenerator as mg
 import os
 import random as ran
 
@@ -8,21 +8,21 @@ def solve() -> None:
     main loop.
     """
     try:
-        properties.get_confing()
-        perfect_ = properties.Perfect
-        rows = properties.Rows if properties.Rows is not None else 0
-        cols = properties.Cols if properties.Cols is not None else 0
-        start = properties.Entry if properties.Entry is not None else (0, 0)
-        end = properties.Exit if properties.Exit is not None else (0, 0)
-        if properties.Seed is not None:
-            seed = properties.Seed
+        mg.get_confing()
+        perfect_ = mg.properties.Perfect
+        rows = mg.properties.Rows if mg.properties.Rows is not None else 0
+        cols = mg.properties.Cols if mg.properties.Cols is not None else 0
+        start = mg.properties.Entry if mg.properties.Entry is not None else (0, 0)
+        end = mg.properties.Exit if mg.properties.Exit is not None else (0, 0)
+        if mg.properties.Seed is not None:
+            seed = mg.properties.Seed
         else:
             seed = ran.randint(1, 1000000)
-        if properties.Output_file is None:
+        if mg.properties.Output_file is None:
             OutFile = "NO_Please"
         else:
-            OutFile = properties.Output_file
-        generater = MazeGenerator()
+            OutFile = mg.properties.Output_file
+        generater = mg.MazeGenerator()
         finish = False
         colors = ["\033[32m", "\033[33m", "\033[34m", "\033[36m"]
         color = 0
