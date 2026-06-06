@@ -2,7 +2,7 @@
 
 # A-Maze-ing
 
-## Description
+## Description  
 
 A-Maze-ing is a maze generation project developed in Python.
 
@@ -15,7 +15,7 @@ The application supports:
 - Perfect mazes (single valid path between entry and exit)
 - Shortest path calculation
 - Maze export to a file
-- Terminal visualization
+- Terminal visualization 
 - Displaying and hiding the solution path
 - Custom wall colors
 - Reusable maze generation package
@@ -262,7 +262,7 @@ Role:
 - README.md
 - Documentation
 
-### Team Member 2
+### ralrawaj
 
 Role:
 - Perfect Maze

@@ -65,13 +65,11 @@ def solve() -> None:
                 os._exit(0)
             else:
                 print("Please enter a number in range (1-4)")
-    except (KeyboardInterrupt, Exception) as e:
+    except (FileNotFoundError, ValueError, KeyboardInterrupt) as e:
         if isinstance(e, KeyboardInterrupt):
-            print("ctrl + c Error")
-        elif isinstance(e, ValueError) or isinstance(e, FileNotFoundError):
-            print(e)
+            print("\nCTRL+C found, exiting normally")
         else:
-            print("Sorry something error")
+            print(e)
         os._exit(0)
 
 
